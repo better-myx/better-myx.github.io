@@ -1119,58 +1119,10 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
 
      
     
-        
-    <script
-    src="https://giscus.app/client.js"
-    data-repo="better-myx/better-myx.github.io"
-    data-repo-id="R_kgDOQThkJA"
-    data-category="Comments"
-    data-category-id="DIC_kwDOQThkJM4Cx05C"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="top"
-    data-theme="light"
-    data-lang="zh-CN"
-    data-loading="lazy"
-    crossorigin="anonymous"
-    async
-></script>
-<script>
-    function setGiscusTheme(theme) {
-        let giscus = document.querySelector("iframe.giscus-frame");
-        if (giscus) {
-            giscus.contentWindow.postMessage(
-                {
-                    giscus: {
-                        setConfig: {
-                            theme: theme,
-                        },
-                    },
-                },
-                "https://giscus.app"
-            );
-        }
-    }
-
-    (function () {
-        addEventListener("message", (e) => {
-            if (event.origin !== "https://giscus.app") return;
-            handler();
-        });
-        window.addEventListener("onColorSchemeChange", handler);
-
-        function handler() {
-            if (document.documentElement.dataset.scheme === "light") {
-                setGiscusTheme('light');
-            } else {
-                setGiscusTheme('dark_dimmed');
-            }
-        }
-    })();
-</script>
-
+        <section class="article-comments">
+      
+      <div class="comment"></div>
+    </section>
     
 
     <footer class="site-footer">
@@ -1287,38 +1239,41 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
         document.head.appendChild(customFont);
     }());
 </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-
 <div id="aplayer"></div>
-
 <script>
 	
 	const musicDir = "https://better-myx.github.io/" + 'music/';
-	const songs =[
+
+	const songs = [
+
 		'Free_Loop-Daniel powter',
+
 		'第57次取消发送(加速版)-菲菲公主',
+
 		'朵-赵雷',
+
 		'风驶过的声音-Strictlyviolin荀博'
+
 	]
 	let audios = [];
 	songs.forEach((item) => {
 		const songInfo = item.split('-')
 		audios.push({
 			name: songInfo[0],
-			artist:songInfo[1],
-			url: musicDir + item +'/song.mp3',
+			artist: songInfo[1],
+			url: musicDir + item + '/song.mp3',
 			cover: musicDir + item + '/cover.jpg',
 			lrc: musicDir + item + '/lyric.lrc',
 		})
 	});
-	
 	const ap = new APlayer({
-    	container: document.getElementById('aplayer'),
+		container: document.getElementById('aplayer'),
 		fixed: true,
-		listMaxHeight: '90px',
 		lrcType: 3,
-    	audio: audios
+		audio: audios
 	});
 </script>
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
@@ -1329,7 +1284,6 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
     })
 
     pjax._handleResponse = pjax.handleResponse;
-
     pjax.handleResponse = function (responseText, request, href, options) {
         if (request.responseText.match("<html")) {
             if (responseText) {
@@ -1350,12 +1304,120 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
         
         window.Stack.init();
     })
-
 </script>
 
-
-
-
-
+<script>
+    (function () {
+      var giscusCfg = {
+        repo: 'better-myx\/better-myx.github.io',
+        repoId: 'R_kgDOQThkJA',
+        category: 'Comments',
+        categoryId: 'DIC_kwDOQThkJM4Cx05C',
+        mapping: 'pathname',
+        strict: '0',
+        reactionsEnabled: '1',
+        emitMetadata: '0',
+        inputPosition: 'top',
+        themePref: 'preferred_color_scheme',
+        lang: 'zh-CN',
+        loading: 'lazy',
+        
+        host: 'https://giscus.app'
+      };
+    
+      function currentSiteTheme() {
+        var ds = document.documentElement.getAttribute('data-scheme') || document.body.getAttribute('data-scheme') || '';
+        if (!ds || ds === 'auto') {
+          return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        }
+        return ds.indexOf('dark') > -1 ? 'dark' : 'light';
+      }
+      function resolveGiscusTheme() {
+        if (giscusCfg.themePref !== 'preferred_color_scheme') return giscusCfg.themePref;
+        return currentSiteTheme() === 'dark' ? 'dark' : 'light';
+      }
+    
+      
+      function showFallback() {
+        var mount = document.querySelector('.comment');
+        if (!mount) return;
+        if (mount.querySelector('.giscus-fallback')) return;
+        var box = document.createElement('div');
+        box.className = 'giscus-fallback';
+        box.style.marginTop = '12px';
+        var q = 'in:title ' + location.pathname;
+        var url = 'https://github.com/better-myx\/better-myx.github.io/discussions?discussions_q=' + encodeURIComponent(q);
+        box.innerHTML = '⚠️ 评论加载失败（网络或拦截）。你可以 <a target="_blank" rel="noopener" href="'+ url +'">在 GitHub 查看本页讨论</a>。';
+        mount.appendChild(box);
+      }
+    
+      function mountGiscus() {
+        var mount = document.querySelector('.comment');
+        if (!mount) return;
+        
+        ['iframe.giscus-frame','script.giscus-script','.giscus-fallback'].forEach(sel=>{
+          var n = mount.querySelector(sel); if (n) n.remove();
+        });
+    
+        var s = document.createElement('script');
+        var host = giscusCfg.host || 'https://giscus.app';
+        s.src = host + '/client.js';
+        s.async = true;
+        s.crossOrigin = 'anonymous';
+        s.className = 'giscus-script';
+        s.setAttribute('data-host', host);
+    
+        s.setAttribute('data-repo', giscusCfg.repo);
+        s.setAttribute('data-repo-id', giscusCfg.repoId);
+        s.setAttribute('data-category', giscusCfg.category);
+        s.setAttribute('data-category-id', giscusCfg.categoryId);
+        s.setAttribute('data-mapping', giscusCfg.mapping);
+        s.setAttribute('data-strict', String(giscusCfg.strict));
+        s.setAttribute('data-reactions-enabled', String(giscusCfg.reactionsEnabled));
+        s.setAttribute('data-emit-metadata', String(giscusCfg.emitMetadata));
+        s.setAttribute('data-input-position', giscusCfg.inputPosition);
+        s.setAttribute('data-theme', resolveGiscusTheme());
+        s.setAttribute('data-lang', giscusCfg.lang);
+        s.setAttribute('data-loading', giscusCfg.loading);
+    
+        
+        s.addEventListener('error', showFallback);
+    
+        mount.appendChild(s);
+    
+        
+        setTimeout(function(){
+          if (!mount.querySelector('iframe.giscus-frame')) showFallback();
+        }, 8000);
+      }
+    
+      function updateGiscusTheme() {
+        var frame = document.querySelector('iframe.giscus-frame');
+        if (!frame) return;
+        var theme = resolveGiscusTheme();
+        frame.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, giscusCfg.host || 'https://giscus.app');
+      }
+    
+      document.addEventListener('DOMContentLoaded', function () {
+        mountGiscus();
+        setTimeout(updateGiscusTheme, 300);
+      });
+      document.addEventListener('pjax:complete', function () {
+        mountGiscus();
+        setTimeout(updateGiscusTheme, 300);
+      });
+    
+      var obs = new MutationObserver(function (mutations) {
+        for (var i=0;i<mutations.length;i++){
+          var m = mutations[i];
+          if (m.type === 'attributes' && (m.attributeName === 'data-scheme' || m.attributeName === 'class')) {
+            updateGiscusTheme();
+          }
+        }
+      });
+      obs.observe(document.documentElement, { attributes: true });
+    })();
+    </script>
+    
     </body>
 </html>
