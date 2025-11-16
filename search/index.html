@@ -1119,17 +1119,20 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
 
 <script>
     var pjax = new Pjax({
-        selectors: [".main-container", ".js-Pjax"] 
+        selectors: [".main-container",".js-Pjax"]
     })
 
-    
     pjax._handleResponse = pjax.handleResponse;
+
     pjax.handleResponse = function (responseText, request, href, options) {
         if (request.responseText.match("<html")) {
             if (responseText) {
+                
                 let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+                
                 let bodyClass = newDom.body.className;
                 document.body.setAttribute("class", bodyClass)
+                
                 pjax._handleResponse(responseText, request, href, options);
             }
         } else {
@@ -1137,56 +1140,28 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
         }
     }
 
-    
-
-    
-    function loadGiscus() {const commentContainer = document.querySelector('#comment-container.giscus');
-        if (!commentContainer) {
-            return;
-        }
-
-        while (commentContainer.firstChild) {
-            commentContainer.removeChild(commentContainer.firstChild);
-        }
-
-        const script = document.createElement('script');
-        script.src = 'https://giscus.app/client.js';
-        script.async = true;
-        script.crossOrigin = 'anonymous';
-        script.setAttribute('data-repo',              'better-myx\/better-myx.github.io');
-        script.setAttribute('data-repo-id',           'R_kgDOQThkJA');
-        script.setAttribute('data-category',          'Comments');
-        script.setAttribute('data-category-id',       'DIC_kwDOQThkJM4Cx05C');
-        script.setAttribute('data-mapping',           'pathname');
-        script.setAttribute('data-strict',            '0');
-        script.setAttribute('data-reactions-enabled', '1');
-        script.setAttribute('data-emit-metadata',     '0');
-        script.setAttribute('data-input-position',    'top');
-        script.setAttribute('data-lang',              'zh-CN');
-        script.setAttribute('data-loading',           'lazy');
-        script.setAttribute('data-theme',             'preferred_color_scheme');
-        
-        commentContainer.appendChild(script);}
-    
-    
-
-
-    
     document.addEventListener('pjax:complete', () => {
         
         window.Stack.init();
-
-        
-        loadGiscus();
     })
 
-    
-    document.addEventListener('DOMContentLoaded', () => {
-        
-        loadGiscus();
-    });
+</script>
 
-</script><div class="js-Pjax"></div>
+
+<div class="js-Pjax">
+    <script>
+        
+        (function() {
+            let script = document.createElement('script');
+            
+             script.setAttribute('key', 'value');
+            ...
+            
+            document.querySelector('xxx').appendchild(script)
+        })(document)
+    </script>
+<div>
+
 
 
     </body>
