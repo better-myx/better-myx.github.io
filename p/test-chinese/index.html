@@ -1525,7 +1525,7 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
 
 <script>
     var pjax = new Pjax({
-        selectors: [".main-container",".js-Pjax"]
+        selectors: [".main-container"]
     })
 
     pjax._handleResponse = pjax.handleResponse;
@@ -1554,51 +1554,8 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
 </script>
 
 
-<div class="js-Pjax">
-    <script>
-        
-        (function() {
-            let script = document.createElement('script');
-            
-             script.setAttribute('key', 'value');
-            ...
-            
-            document.querySelector('xxx').appendchild(script)
-        })(document)
-    </script>
-<div>
 
 
 
-<div class="js-Pjax">
-<script>
-    (function () {
-        
-        let comment = document.querySelector(".comment");
-        if (!comment) {
-            return
-        }
-        let script = document.createElement('script');
-        
-        script.setAttribute('src', 'https://giscus.app/client.js');
-        script.setAttribute('data-repo', 'better-myx\/better-myx.github.io');
-        script.setAttribute('data-repo-id', 'R_kgDOQThkJA');
-        script.setAttribute('data-category', 'Comments');
-        script.setAttribute('data-category-id', 'DIC_kwDOQThkJM4Cx05C');
-        script.setAttribute('data-mapping', 'pathname');
-        script.setAttribute('data-strict', '0');
-        script.setAttribute('data-reactions-enabled', '1');
-        script.setAttribute('data-emit-metadata', '0');
-        script.setAttribute('data-input-position', 'top');
-        script.setAttribute('data-theme', 'light');
-        script.setAttribute('data-lang', 'zh-CN');
-        script.setAttribute('data-loading', 'lazy');
-        script.setAttribute('crossorigin', 'better-myx\/better-myx.github.io');
-        script.async = true;
-        
-        document.querySelector('.site-footer').before(script)
-    })(document);
-</script>
-<div>
     </body>
 </html>
