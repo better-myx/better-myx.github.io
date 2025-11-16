@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Math on Bettermyxの梦想屋</title>
+        <link>https://better-myx.github.io/tags/math/</link>
+        <description>Recent content in Math on Bettermyxの梦想屋</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>By Bettermyx Rights Reserved.</copyright>
+        <lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://better-myx.github.io/tags/math/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>KaTeX 渲染验收样例</title>
+        <link>https://better-myx.github.io/p/katex-demo/</link>
+        <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://better-myx.github.io/p/katex-demo/</guid>
+        <description>&lt;p&gt;本文用于验证 &lt;strong&gt;KaTeX 在 PJAX 切页后是否能正常渲染&lt;/strong&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;✅ &lt;strong&gt;行内公式&lt;/strong&gt;示例：黄金比例 $\varphi=\dfrac{1+\sqrt{5}}{2}$，欧拉恒等式 $e^{i\pi}+1=0$。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-块级公式&#34;&gt;1. 块级公式
+&lt;/h2&gt;$$
+\int_0^{\infty} e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2}
+$$$$
+\sum_{n=0}^{\infty} x^n = \frac{1}{1-x},\quad |x|&lt;1
+$$&lt;hr&gt;
+&lt;h2 id=&#34;2-对齐环境aligned&#34;&gt;2. 对齐环境（aligned）
+&lt;/h2&gt;$$
+\begin{aligned}
+(a+b)^2 &amp;= a^2 + 2ab + b^2 \\
+\vec{\nabla}\cdot \vec{E} &amp;= \frac{\rho}{\varepsilon_0}
+\end{aligned}
+$$&lt;hr&gt;
+&lt;h2 id=&#34;3-分段函数cases&#34;&gt;3. 分段函数（cases）
+&lt;/h2&gt;$$
+f(x)=
+\begin{cases}
+x^2, &amp; x\ge 0,\\
+-x,  &amp; x&lt;0.
+\end{cases}
+$$&lt;hr&gt;
+&lt;h2 id=&#34;4-矩阵&#34;&gt;4. 矩阵
+&lt;/h2&gt;$$
+\mathbf{A}=
+\begin{bmatrix}
+1 &amp; 2 &amp; 3\\
+0 &amp; -1 &amp; 4\\
+5 &amp; 6 &amp; 0
+\end{bmatrix}
+$$&lt;hr&gt;
+&lt;h2 id=&#34;5-极限与导数&#34;&gt;5. 极限与导数
+&lt;/h2&gt;&lt;p&gt;行内极限 $\lim_{x\to 0}\frac{\sin x}{x}=1$，&lt;br&gt;
+行内导数 $\dfrac{d}{dx}e^{x}=e^{x}$。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-注意事项&#34;&gt;6. 注意事项
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在代码块里（` `` ``），公式&lt;strong&gt;不会&lt;/strong&gt;渲染（我们已忽略 &lt;code&gt;code/pre&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;货币符号 &lt;code&gt;$&lt;/code&gt; 请与公式分开，避免被识别为行内公式。&lt;/li&gt;
+&lt;li&gt;如果&lt;strong&gt;首次进入&lt;/strong&gt;不是数学页，再通过站内链接（PJAX）进入本页，公式也应当自动渲染（我们做了按需加载）。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

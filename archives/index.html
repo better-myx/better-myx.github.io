@@ -1024,6 +1024,19 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
             <div class="article-list--tile">
                 
                     
+<article class="">
+    <a href="/categories/notes/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Notes</h2>
+        </div>
+    </a>
+</article>
+
+                
+                    
 <article class="has-image">
     <a href="/categories/test/">
         
@@ -1113,6 +1126,17 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
     <div class="archives-group" id="2025">
         <h2 class="archives-date section-title"><a href="/archives/#2025">2025</a></h2>
         <div class="article-list--compact">
+            
+                <article>
+    <a href="/p/katex-demo/">
+        <div class="article-details">
+            <h2 class="article-title">KaTeX 渲染验收样例</h2>
+            <footer class="article-time">
+                <time datetime='2025-11-16T00:00:00Z'>2025-11-16</time>
+            </footer>
+        </div>
+    </a>
+</article>
             
                 <article>
     <a href="/p/%E8%AE%B0%E7%AC%94%E8%AE%B0%E6%97%B6%E7%9A%84%E6%BC%94%E7%A4%BA%E6%96%87%E6%A1%A3/">
@@ -1355,6 +1379,11 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
 </script>
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
+
+
+<script src=https://better-myx.github.io/js/topbar.min.js></script>
+
+
 <script>
     var pjax = new Pjax({
         selectors: [".main-container"]
@@ -1377,9 +1406,24 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
         }
     }
 
+    
+    topbar.config({
+        barColors: {
+            '0': 'rgba(255,  255, 255, 1)', 
+            '1.0': 'rgba(0, 149, 234,  1)' 
+        }
+    })
+
+    document.addEventListener('pjax:send', () => {
+        topbar.show();
+    })
+
+
     document.addEventListener('pjax:complete', () => {
         
         window.Stack.init();
+        
+        topbar.hide();
     })
 </script>
 
@@ -1493,6 +1537,113 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
         }
       });
       obs.observe(document.documentElement, { attributes: true });
+    })();
+    </script>
+    
+
+<script>
+    (function () {
+      
+      var KATEX_VER = '0.16.9';
+      var KATEX_CSS = 'https://cdn.jsdelivr.net/npm/katex@' + KATEX_VER + '/dist/katex.min.css';
+      var KATEX_JS  = 'https://cdn.jsdelivr.net/npm/katex@' + KATEX_VER + '/dist/katex.min.js';
+      var KATEX_AUTO_JS = 'https://cdn.jsdelivr.net/npm/katex@' + KATEX_VER + '/dist/contrib/auto-render.min.js';
+    
+      function ensureStyle(href, id) {
+        return new Promise(function(resolve) {
+          if (document.getElementById(id)) return resolve();
+          var link = document.createElement('link');
+          link.id = id;
+          link.rel = 'stylesheet';
+          link.href = href;
+          link.onload = function () { resolve(); };
+          link.onerror = function () { resolve(); }; 
+          (document.head || document.body).appendChild(link);
+        });
+      }
+    
+      function ensureScript(src, id) {
+        return new Promise(function(resolve) {
+          if (document.getElementById(id)) return resolve();
+          var s = document.createElement('script');
+          s.id = id;
+          s.src = src;
+          s.async = true;
+          s.onload = function () { resolve(); };
+          s.onerror = function () { resolve(); }; 
+          (document.head || document.body).appendChild(s);
+        });
+      }
+    
+      
+      function waitRenderFn(timeoutMs) {
+        return new Promise(function(resolve){
+          var start = Date.now();
+          (function loop(){
+            if (typeof window.renderMathInElement === 'function') return resolve(true);
+            if (Date.now() - start > timeoutMs) return resolve(false);
+            setTimeout(loop, 150);
+          })();
+        });
+      }
+    
+      function hasMathPage() {
+        return !!document.querySelector('.math-katex');
+      }
+    
+      function showFallback() {
+        var mount = document.querySelector('.article-content') || document.querySelector('.main-container') || document.body;
+        if (mount.querySelector('.katex-fallback')) return;
+        var box = document.createElement('div');
+        box.className = 'katex-fallback';
+        box.style.margin = '12px 0';
+        box.style.opacity = '.75';
+        box.innerHTML = '⚠️ 数学公式加载失败（网络或拦截）。';
+        mount.appendChild(box);
+      }
+    
+      function renderAll() {
+        
+        var scope = document.querySelector('.article-content') || document.querySelector('.main-container') || document.body;
+        try {
+          window.renderMathInElement(scope, {
+            delimiters: [
+              { left: "$$", right: "$$", display: true  },
+              { left: "$",  right: "$",  display: false },
+              { left: "\\(", right: "\\)", display: false },
+              { left: "\\[", right: "\\]", display: true  }
+            ],
+            throwOnError: false,
+            ignoredTags: ['script','noscript','style','textarea','pre','code'],
+            ignoredClasses: ['gist','no-katex']
+          });
+        } catch (e) {
+          console && console.warn && console.warn('KaTeX render error:', e);
+          showFallback();
+        }
+      }
+    
+      async function ensureAndRender() {
+        if (!hasMathPage()) return;            
+    
+        
+        await ensureStyle(KATEX_CSS, 'katex-css');
+        await ensureScript(KATEX_JS, 'katex-js');
+        await ensureScript(KATEX_AUTO_JS, 'katex-auto-js');
+    
+        
+        var ok = await waitRenderFn(8000);
+        if (!ok) { showFallback(); return; }
+    
+        
+        renderAll();
+      }
+    
+      
+      document.addEventListener('DOMContentLoaded', ensureAndRender);
+    
+      
+      document.addEventListener('pjax:complete', ensureAndRender);
     })();
     </script>
     

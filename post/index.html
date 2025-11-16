@@ -10,7 +10,7 @@
 <meta property='og:description' content="每天进步一点点。">
 <meta property='og:url' content='https://better-myx.github.io/post/'>
 <meta property='og:site_name' content='Bettermyxの梦想屋'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-11-13T13:33:59&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-11-16T00:00:00&#43;00:00 '/>
 <meta name="twitter:title" content="Posts">
 <meta name="twitter:description" content="每天进步一点点。"><link rel="alternate" type="application/rss&#43;xml" href="https://better-myx.github.io/post/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -1062,7 +1062,7 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
                     <a href="/archives/#2025">
                         
                             <span class="year">2025</span>
-                            <span class="count">5</span>
+                            <span class="count">6</span>
                         
                     </a> 
                 </div>
@@ -1109,6 +1109,10 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
                 Test
             </a>
         
+            <a href="/categories/notes/" class="font_size_1">
+                Notes
+            </a>
+        
             <a href="/categories/syntax/" class="font_size_1">
                 Syntax
             </a>
@@ -1143,7 +1147,7 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
 
         <div class="section-card">
             <div class="section-details">
-                <h3 class="section-count">10 个页面</h3>
+                <h3 class="section-count">11 个页面</h3>
                 <h1 class="section-term">Posts</h1>
                 
             </div>
@@ -1151,6 +1155,17 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
     </header>
     
     <section class="article-list--compact">
+        
+            <article>
+    <a href="/p/katex-demo/">
+        <div class="article-details">
+            <h2 class="article-title">KaTeX 渲染验收样例</h2>
+            <footer class="article-time">
+                <time datetime='2025-11-16T00:00:00Z'>2025-11-16</time>
+            </footer>
+        </div>
+    </a>
+</article>
         
             <article>
     <a href="/p/%E8%AE%B0%E7%AC%94%E8%AE%B0%E6%97%B6%E7%9A%84%E6%BC%94%E7%A4%BA%E6%96%87%E6%A1%A3/">
@@ -1204,26 +1219,6 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
                 <time datetime='2025-11-10T22:11:25&#43;08:00'>2025-11-10</time>
             </footer>
         </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/test-chinese/">
-        <div class="article-details">
-            <h2 class="article-title">Chinese Test</h2>
-            <footer class="article-time">
-                <time datetime='2020-09-09T00:00:00Z'>2020-09-09</time>
-            </footer>
-        </div>
-            <div class="article-image">
-                <img src="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_2307260c751d0e0b.jpg" 
-                        width="120"
-                        height="120" 
-                        alt="Chinese Test"
-                        loading="lazy">
-                
-            </div>
-        
     </a>
 </article>
         
@@ -1318,6 +1313,11 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
 </script>
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 
+
+
+<script src=https://better-myx.github.io/js/topbar.min.js></script>
+
+
 <script>
     var pjax = new Pjax({
         selectors: [".main-container"]
@@ -1340,9 +1340,24 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
         }
     }
 
+    
+    topbar.config({
+        barColors: {
+            '0': 'rgba(255,  255, 255, 1)', 
+            '1.0': 'rgba(0, 149, 234,  1)' 
+        }
+    })
+
+    document.addEventListener('pjax:send', () => {
+        topbar.show();
+    })
+
+
     document.addEventListener('pjax:complete', () => {
         
         window.Stack.init();
+        
+        topbar.hide();
     })
 </script>
 
@@ -1456,6 +1471,113 @@ MjAyNS0xMS0xMFQxNzozMDowNSswMDowMH/Y1oQAAAAASUVORK5CYII=" />
         }
       });
       obs.observe(document.documentElement, { attributes: true });
+    })();
+    </script>
+    
+
+<script>
+    (function () {
+      
+      var KATEX_VER = '0.16.9';
+      var KATEX_CSS = 'https://cdn.jsdelivr.net/npm/katex@' + KATEX_VER + '/dist/katex.min.css';
+      var KATEX_JS  = 'https://cdn.jsdelivr.net/npm/katex@' + KATEX_VER + '/dist/katex.min.js';
+      var KATEX_AUTO_JS = 'https://cdn.jsdelivr.net/npm/katex@' + KATEX_VER + '/dist/contrib/auto-render.min.js';
+    
+      function ensureStyle(href, id) {
+        return new Promise(function(resolve) {
+          if (document.getElementById(id)) return resolve();
+          var link = document.createElement('link');
+          link.id = id;
+          link.rel = 'stylesheet';
+          link.href = href;
+          link.onload = function () { resolve(); };
+          link.onerror = function () { resolve(); }; 
+          (document.head || document.body).appendChild(link);
+        });
+      }
+    
+      function ensureScript(src, id) {
+        return new Promise(function(resolve) {
+          if (document.getElementById(id)) return resolve();
+          var s = document.createElement('script');
+          s.id = id;
+          s.src = src;
+          s.async = true;
+          s.onload = function () { resolve(); };
+          s.onerror = function () { resolve(); }; 
+          (document.head || document.body).appendChild(s);
+        });
+      }
+    
+      
+      function waitRenderFn(timeoutMs) {
+        return new Promise(function(resolve){
+          var start = Date.now();
+          (function loop(){
+            if (typeof window.renderMathInElement === 'function') return resolve(true);
+            if (Date.now() - start > timeoutMs) return resolve(false);
+            setTimeout(loop, 150);
+          })();
+        });
+      }
+    
+      function hasMathPage() {
+        return !!document.querySelector('.math-katex');
+      }
+    
+      function showFallback() {
+        var mount = document.querySelector('.article-content') || document.querySelector('.main-container') || document.body;
+        if (mount.querySelector('.katex-fallback')) return;
+        var box = document.createElement('div');
+        box.className = 'katex-fallback';
+        box.style.margin = '12px 0';
+        box.style.opacity = '.75';
+        box.innerHTML = '⚠️ 数学公式加载失败（网络或拦截）。';
+        mount.appendChild(box);
+      }
+    
+      function renderAll() {
+        
+        var scope = document.querySelector('.article-content') || document.querySelector('.main-container') || document.body;
+        try {
+          window.renderMathInElement(scope, {
+            delimiters: [
+              { left: "$$", right: "$$", display: true  },
+              { left: "$",  right: "$",  display: false },
+              { left: "\\(", right: "\\)", display: false },
+              { left: "\\[", right: "\\]", display: true  }
+            ],
+            throwOnError: false,
+            ignoredTags: ['script','noscript','style','textarea','pre','code'],
+            ignoredClasses: ['gist','no-katex']
+          });
+        } catch (e) {
+          console && console.warn && console.warn('KaTeX render error:', e);
+          showFallback();
+        }
+      }
+    
+      async function ensureAndRender() {
+        if (!hasMathPage()) return;            
+    
+        
+        await ensureStyle(KATEX_CSS, 'katex-css');
+        await ensureScript(KATEX_JS, 'katex-js');
+        await ensureScript(KATEX_AUTO_JS, 'katex-auto-js');
+    
+        
+        var ok = await waitRenderFn(8000);
+        if (!ok) { showFallback(); return; }
+    
+        
+        renderAll();
+      }
+    
+      
+      document.addEventListener('DOMContentLoaded', ensureAndRender);
+    
+      
+      document.addEventListener('pjax:complete', ensureAndRender);
     })();
     </script>
     
